@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.color{
+			background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-wallpaper-background_58702-3798.jpg?w=2000);
+		}
+		.text{
+			padding: 15% 40%;
+		}
+		#name{
+			margin: 3%;
+			border-radius: 25px;
+			border-color: black;
+			padding: 1%;
+		}
+		#password{
+			margin: 3%;
+			border-radius: 25px;
+			border-color: black;
+			padding: 1%;
+		}
+		#sub{
+			margin: 5% 21%;
+		}
+		#select{
+			/*margin: 5% 13%;*/
+			margin: 5% 73% 5% 13%;
+		}
+
+	</style>
+</head>
+<body class="color">
+	
+	<div class="text">
+		<input placeholder="Enter User name" id="name"></br>
+		<input placeholder="Enter Password" id="password"></br>
+		<select id="select">
+			<option value="select">Select</option></br>
+			<option value="B.com">B.Com (C.A)</option>
+			<option value="bca">BCA </option>
+			<option value="ttp">TTP</option>
+			<option value="bba">BBA</option>
+			<option value="it">IT</option>
+	    </select>
+	    <input type="radio" name="gender" id="Male">Male</br>
+	    <input type="radio" name="gender" id="Female">Female</br>
+		<button id="sub" onclick="Submit()">Submit</button>
+
+	</div>
+	<script type="text/javascript">
+		
+		function Submit(){
+			let newName=document.getElementById("name").value
+				console.log(newName)
+			let newPassword=document.getElementById("password").value
+				console.log(newPassword)
+			let newDrop=document.getElementById("select").value
+				console.log(newDrop)
+			let gmale=document.getElementById("Male").checked
+			let gfemale=document.getElementById("Female").checked
+            if(gmale==true) 
+            	var gender="Male"
+            	else var gender="Female"
+            console.log(gender)
+
+				fetch("http://localhost:5000/newData",{
+				method:"POST",
+				headers:{
+							"Content-Type":"application/json"
+						},
+				body:JSON.stringify({name:newName,password:newPassword,select:newDrop,gender:gender})
+				
+			})
+				.then((res)=>{
+					console.log(res)
+					if(res.status==200)
+						alert("Registration successful")
+				})
+				.catch((err)=>{
+					alert(err)
+				})
+		}
+	</script>
+
+</body>
+</html>
